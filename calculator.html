@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Care Cost Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        form {
+            max-width: 400px;
+            margin: auto;
+            padding: 1em;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        div {
+            margin-bottom: 1em;
+        }
+        label {
+            margin-bottom: .5em;
+            color: #333333;
+            display: block;
+        }
+        input, select {
+            padding: .5em;
+            font-size: 1em;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 0.7em;
+            color: #fff;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 1em;
+            font-size: 1.2em;
+            color: #333333;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Pet Care Cost Calculator</h2>
+
+<h3><a href="index.html">Home</a></h3>
+<form id="petForm">
+    <div>
+        <label for="petType">Pet Type:</label>
+        <select id="petType">
+            <option value="dog">Dog</option>
+            <option value="cat">Cat</option>
+            <option value="rabbit">Rabbit</option>
+        </select>
+    </div>
+    <div>
+        <label for="petAge">Pet Age (in years):</label>
+        <input type="number" id="petAge" min="0">
+    </div>
+    <div>
+        <label for="petSize">Pet Size:</label>
+        <select id="petSize">
+            <option value="small">Small</option>
+            <option value="medium">Medium</option>
+            <option value="large">Large</option>
+        </select>
+    </div>
+    <button type="button" onclick="calculateCost()">Calculate Cost</button>
+    <div class="result" id="result"></div>
+</form>
+
+<script>
+    function calculateCost() {
+        let petType = document.getElementById('petType').value;
+        let petAge = document.getElementById('petAge').value;
+        let petSize = document.getElementById('petSize').value;
+
+        let baseCost = 0;
+
+        switch(petType) {
+            case 'dog':
+                baseCost = 50;
+                break;
+            case 'cat':
+                baseCost = 40;
+                break;
+            case 'rabbit':
+                baseCost = 30;
+                break;
+        }
+
+        let ageFactor = (petAge < 2) ? 1.2 : 1;
+        let sizeFactor = (petSize === 'small') ? 1 : (petSize === 'medium') ? 1.5 : 2;
+
+        let totalCost = baseCost * ageFactor * sizeFactor;
+
+        document.getElementById('result').innerText = `Estimated Monthly Care Cost: $${totalCost.toFixed(2)}`;
+    }
+</script>
+
+</body>
+</html>
